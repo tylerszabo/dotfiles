@@ -1,0 +1,16 @@
+# Add color
+eval "`dircolors -b \"$HOME/.dir_colors\"`"
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias less='less -R'
+
+# Disable word wrap
+alias nano='nano -w'
+
+# Enable assertions
+alias java='java -ea'
+
+# Other
+alias wtf='apropos'
+alias bdiff='vbindiff'
+alias quit='exit'

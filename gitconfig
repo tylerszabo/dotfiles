@@ -1,0 +1,10 @@
+[user]
+	name = Tyler Szabo
+	email = tyler.szabo@gmail.com
+[color]
+	branch = auto
+	diff = auto
+	pager = true
+	status = auto
+[core]
+	pager = less -+ -FRXS
