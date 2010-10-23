@@ -1,8 +1,8 @@
 # Add color
 eval "`dircolors -b \"$HOME/.dir_colors\"`"
-alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias less='less -R'
+alias ls='ls --color=auto'
 
 # Disable word wrap
 alias nano='nano -w'
@@ -11,8 +11,9 @@ alias nano='nano -w'
 alias java='java -ea'
 
 # Other
-alias wtf='apropos'
 alias bdiff='vbindiff'
-alias quit='exit'
+alias mtrr='mtr --report --report-cycles=1'
 alias o='xdg-open'
+alias quit='exit'
 alias vi='vim'
+alias wtf='apropos'
