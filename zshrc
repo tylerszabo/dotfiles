@@ -32,7 +32,7 @@ window_title_exec () {
   window_title "%(!.#.>) ${1}"
 }
 
-if is-at-least 4.3.4 ; then
+if is-at-least 4.3.9 ; then
   add-zsh-hook precmd window_title
   add-zsh-hook preexec window_title_exec
 else
