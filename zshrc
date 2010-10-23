@@ -7,6 +7,9 @@
 ## never ever beep ever
 setopt NO_BEEP
 
+## Allow for version-aware code
+autoload -U is-at-least
+
 
 ## Configure the prompt
 
@@ -14,36 +17,56 @@ local HOSTCOLOR=cyan
 local WHOAMI=`whoami`
 [[ ${WHOAMI} == 'root' ]] && HOSTCOLOR=red
 [[ ${WHOAMI} == 'tyler' ]] && HOSTCOLOR=green
+[[ ${WHOAMI} == 'szabo' ]] && HOSTCOLOR=green
 unset RPROMPT
 autoload -U promptinit
 promptinit
 prompt adam2 - blue ${HOSTCOLOR} -
 
 window_title () {
-    TITLE="%M:%~$@"
-    [[ "$TERM" == "xterm" ]] && print -Pn "\e]0;${TITLE}\a"
+  TITLE="%M:%~$@"
+  [[ "$TERM" == "xterm" ]] && print -Pn "\e]0;${TITLE}\a"
 }
 
 window_title_exec () {
-    window_title "%(!.#.>) ${1}"
+  window_title "%(!.#.>) ${1}"
 }
 
-add-zsh-hook precmd window_title
-
-add-zsh-hook preexec window_title_exec
+if is-at-least 4.3.4 ; then
+  add-zsh-hook precmd window_title
+  add-zsh-hook preexec window_title_exec
+else
+  precmd () {
+    prompt_adam2_precmd
+    window_title
+    setopt promptsubst
+  }
+  preexec () {
+    prompt_adam2_preexec
+    window_title_exec $1
+  }
+fi
 
 
 ## Configure Path
 
+pathdel() {
+  local pos=${path[(i)${1}]}
+  [[ ${pos} -le ${#path} ]] && path[${pos}]=()
+}
+
 pathadd () {
-  [[ -z ${path[(r)"${1}"]} ]] && [[ -d "${1}" ]] && path=("${1}" "$path[@]")
+  [[ -d "${1}" ]] && { pathdel "${1}" ; path=("${1}" "$path[@]") }
 }
 
 ## Add home bin last for highest affinity
 pathadd "${HOME}/bin"
 
-## remove dupes just in case and export
+## remove dupes and dead paths then export
 typeset -U path
+for i in $path ; do
+  [[ -d "$i" ]] || pathdel $i
+done
 export PATH
 
 
