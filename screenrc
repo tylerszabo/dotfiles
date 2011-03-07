@@ -1,3 +1,5 @@
+shell /usr/bin/zsh
+
 startup_message off
 
 hardstatus alwayslastline
