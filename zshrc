@@ -10,7 +10,6 @@ setopt NO_BEEP
 ## Allow for version-aware code
 autoload -U is-at-least
 
-
 ## Configure the prompt
 
 local HOSTCOLOR=cyan
@@ -82,6 +81,13 @@ zstyle ':completion:*' use-compctl true
 
 autoload -U compinit
 compinit
+
+## Load git shortcuts
+if [[ -f /etc/bash_completion.d/git ]] ; then
+  autoload -U bashcompinit
+  bashcompinit
+  source /etc/bash_completion.d/git
+fi
 
 
 ## Include other files
