@@ -20,7 +20,7 @@ local WHOAMI=`whoami`
 unset RPROMPT
 autoload -U promptinit
 promptinit
-prompt adam2 - blue ${HOSTCOLOR} -
+prompt adam2 black blue ${HOSTCOLOR} black
 
 window_title () {
   TITLE="%M:%~$@"
@@ -31,11 +31,22 @@ window_title_exec () {
   window_title "%(!.#.>) ${1}"
 }
 
+git_prompt() {
+  if [[ -n "$prompt_line_1a_orig" ]] ; then
+    export prompt_line_1a="$prompt_line_1a_orig$(__git_ps1 '-(%s)')"
+  fi
+}
+
 if is-at-least 4.3.9 ; then
+  add-zsh-hook -d precmd prompt_adam2_precmd
+  add-zsh-hook precmd git_prompt
+  add-zsh-hook precmd prompt_adam2_precmd
   add-zsh-hook precmd window_title
+
   add-zsh-hook preexec window_title_exec
 else
   precmd () {
+    git_prompt
     prompt_adam2_precmd
     window_title
     setopt promptsubst
@@ -87,6 +98,8 @@ if [[ -f /etc/bash_completion.d/git ]] ; then
   autoload -U bashcompinit
   bashcompinit
   source /etc/bash_completion.d/git
+
+  export prompt_line_1a_orig="$prompt_line_1a"
 fi
 
 
