@@ -4,6 +4,9 @@
 # functions, options, key bindings, etc.
 #
 
+## set Vi mode
+bindkey -v
+
 ## never ever beep ever
 setopt NO_BEEP
 
