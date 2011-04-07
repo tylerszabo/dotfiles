@@ -1,6 +1,7 @@
 # Add color
 eval "`dircolors -b \"$HOME/.dir_colors\"`"
 alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
 alias less='less -R'
 alias ls='ls --color=auto'
 
