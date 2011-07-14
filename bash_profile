@@ -4,8 +4,4 @@ if [ -f ~/.bashrc ]; then
 fi
 
 echo
-echo 'Welcome back!'
-echo
-fortune -s
-echo
 uptime
