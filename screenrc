@@ -2,5 +2,8 @@ shell /usr/bin/zsh
 
 startup_message off
 
+bell_msg 'Bell in window %n^G'
+vbell off
+
 hardstatus alwayslastline
 hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f %t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %Y-%m-%d %{W}%c %{g}]'
