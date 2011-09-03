@@ -11,7 +11,12 @@ bindkey -v
 setopt NO_BEEP
 
 ## Allow for version-aware code
-autoload -U is-at-least
+autoload +XUz is-at-least 2>/dev/null || {
+  is-at-least () {
+    return -1
+  }
+}
+
 
 ## Configure the prompt
 
@@ -21,7 +26,7 @@ local WHOAMI=`whoami`
 [[ ${WHOAMI} == 'tyler' ]] && HOSTCOLOR=green
 [[ ${WHOAMI} == 'szabo' ]] && HOSTCOLOR=green
 unset RPROMPT
-autoload -U promptinit
+autoload -Uz promptinit
 promptinit
 prompt adam2 black blue ${HOSTCOLOR} black
 
@@ -34,10 +39,33 @@ window_title_exec () {
   window_title "%(!.#.>) ${1}"
 }
 
+
+## Put version control into PS1
+
+if autoload +XUz vcs_info 2>/dev/null || {
+  vcs_info () {
+    return -1
+  }
+} && {
+  zstyle ':vcs_info:*' stagedstr '+'
+  zstyle ':vcs_info:*' unstagedstr '*'
+  zstyle ':vcs_info:*' check-for-changes true
+  zstyle ':vcs_info:*' formats '(%s)-(%b%u%c)'
+  zstyle ':vcs_info:*' actionformats '(%s)-(%b%u%c|%a)'
+
+  # Use git completion for git PS1
+  zstyle ':vcs_info:*' disable git
+}
+
 __versioncontrol_ps1 () {
-  # Stack the VCs on top of each other, maybe more than one is in use
-  echo -n "$(__git_ps1 '-git(%s)')"
-  echo -n "$(__svn_ps1 '-svn(%s)')"
+  # Use git completion for git PS1
+  echo -n "$(__git_ps1 '-(git)-(%s)')"
+
+  if vcs_info ; then
+    echo -n "-${vcs_info_msg_0_}"
+  else
+    echo -n "$(__svn_ps1 '-(svn)-(%s)')"
+  fi
 }
 
 export prompt_line_1a_orig="$prompt_line_1a"
@@ -46,6 +74,9 @@ versioncontrol_prompt() {
     export prompt_line_1a="$prompt_line_1a_orig$(__versioncontrol_ps1)"
   fi
 }
+
+
+## Configure hooks
 
 if is-at-least 4.3.9 ; then
   add-zsh-hook -d precmd prompt_adam2_precmd
