@@ -34,23 +34,29 @@ window_title_exec () {
   window_title "%(!.#.>) ${1}"
 }
 
+__versioncontrol_ps1 () {
+  # Stack the VCs on top of each other, maybe more than one is in use
+  echo -n "$(__git_ps1 '-git(%s)')"
+  echo -n "$(__svn_ps1 '-svn(%s)')"
+}
+
 export prompt_line_1a_orig="$prompt_line_1a"
-git_prompt() {
+versioncontrol_prompt() {
   if [[ -n "$prompt_line_1a_orig" ]] ; then
-    export prompt_line_1a="$prompt_line_1a_orig$(__git_ps1 '-(%s)')"
+    export prompt_line_1a="$prompt_line_1a_orig$(__versioncontrol_ps1)"
   fi
 }
 
 if is-at-least 4.3.9 ; then
   add-zsh-hook -d precmd prompt_adam2_precmd
-  add-zsh-hook precmd git_prompt
+  add-zsh-hook precmd versioncontrol_prompt
   add-zsh-hook precmd prompt_adam2_precmd
   add-zsh-hook precmd window_title
 
   add-zsh-hook preexec window_title_exec
 else
   precmd () {
-    git_prompt
+    versioncontrol_prompt
     prompt_adam2_precmd
     window_title
     setopt promptsubst
@@ -115,6 +121,21 @@ compinit
 [[ -e ${HOME}/.shortcuts ]] && source ${HOME}/.shortcuts
 
 [[ -e ${HOME}/.aliases ]] && source ${HOME}/.aliases
+
+
+## SVN PS1
+# Really basic
+
+__svn_ps1() {
+  if svn info --non-interactive &>/dev/null ; then
+    local rev=`svn info --non-interactive | awk '/Revision:/ {print $2}'`
+    local branchtag=""
+    local flag_changed=`{svn status | grep '.'} &>/dev/null && echo -n \*`
+
+    local flags=$flag_changed
+		printf "${1:- (%s)}" "${branchtag:+$branchtag:}$rev${flags:+ $flags}"
+  fi
+}
 
 
 ## Include Git completion content directly for now
