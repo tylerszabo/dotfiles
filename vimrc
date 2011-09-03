@@ -4,6 +4,12 @@ set spell
 set hlsearch
 set t_Co=256
 
+if exists('+colorcolumn')
+  set colorcolumn=81
+else
+  match ErrorMsg '\%81v.\+'
+endif
+
 colorscheme desert
 set statusline=%f%m%r%h%w\ [Format=%{&ff}]\ [Type=%Y]%=[%v,%l]
 set laststatus=2
