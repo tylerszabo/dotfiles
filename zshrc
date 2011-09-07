@@ -42,7 +42,7 @@ window_title_exec () {
 
 ## Put version control into PS1
 
-if autoload +XUz vcs_info 2>/dev/null || {
+autoload +XUz vcs_info 2>/dev/null || {
   vcs_info () {
     return -1
   }
