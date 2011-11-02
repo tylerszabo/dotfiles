@@ -25,6 +25,7 @@ local WHOAMI=`whoami`
 [[ ${WHOAMI} == 'root' ]] && HOSTCOLOR=red
 [[ ${WHOAMI} == 'tyler' ]] && HOSTCOLOR=green
 [[ ${WHOAMI} == 'szabo' ]] && HOSTCOLOR=green
+[[ ${WHOAMI} == 'tszabo' ]] && HOSTCOLOR=green
 unset RPROMPT
 autoload -Uz promptinit
 promptinit
