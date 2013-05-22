@@ -10,3 +10,4 @@
   date = iso
 [core]
   pager = less -+ -FRXS
+  editor = /usr/bin/vim
