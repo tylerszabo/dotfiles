@@ -17,7 +17,7 @@ for i in "$REPODIR/dotfiles/"* ; do
   
   if [ -e "$DEST" -o -h "$DEST" ] ; then
     DATESTAMP=`date +%s`
-    echo mv "$DEST" "$DEST".bak-$DATESTAMP
+    mv "$DEST" "$DEST".bak-$DATESTAMP
   fi
-  echo ln -s "$TARGET" "$DEST"
+  ln -s "$TARGET" "$DEST"
 done
