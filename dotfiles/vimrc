@@ -2,9 +2,12 @@ set number
 syntax on
 set spell
 set hlsearch
-set t_Co=256
 
 colorscheme desert
+if has("gui_running")
+  colorscheme solarized
+endif
+
 set statusline=%f%m%r%h%w\ [Format=%{&ff}]\ [Type=%Y]%=[%v,%l]
 set laststatus=2
 
