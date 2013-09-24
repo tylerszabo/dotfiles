@@ -1,12 +1,8 @@
+set nomodeline
 set number
 syntax on
 set spell
 set hlsearch
-
-colorscheme desert
-if has("gui_running")
-  colorscheme solarized
-endif
 
 set statusline=%f%m%r%h%w\ [Format=%{&ff}]\ [Type=%Y]%=[%v,%l]
 set laststatus=2
@@ -21,8 +17,34 @@ set tildeop
 
 imap <f1> <esc>
 map <f12> :set spell!<CR>
+set nospell
 map <f11> :nohl<CR>
 set mouse=a
 
-set guifont=Consolas:h9:cANSI
-set guioptions=egm
+colorscheme desert
+if has("gui_running")
+
+  set guifont=Consolas:h10:cANSI
+  set guioptions=egm
+
+  " From http://stackoverflow.com/questions/6510481/colorscheme-change-when-filetype-changes
+  augroup ft_colorscheme
+    au BufEnter *
+    \ if !exists('b:colors_name') && !exists('b:bg_type')
+        \ | if !exists(&ft)
+            \ | let b:colors_name = 'desert'
+        \ | elseif &ft == "xml"
+            \ | let b:colors_name = 'desert'
+        \ | elseif &ft == "dosbatch"
+            \ | let b:colors_name = 'solarized'
+            \ | let b:bg_type = 'dark'
+        \ | else
+            \ | let b:colors_name = 'solarized'
+            \ | let b:bg_type = 'dark'
+        \ | endif
+    \ | endif
+    \ | exe 'colorscheme' b:colors_name
+    \ | if exists('b:bg_type')
+      \ | let &background = b:bg_type
+  augroup END
+endif
