@@ -31,7 +31,7 @@ if has("gui_running")
   augroup ft_colorscheme
     au BufEnter *
     \ if !exists('b:colors_name') && !exists('b:bg_type')
-        \ | if !exists(&ft)
+        \ | if &ft == ""
             \ | let b:colors_name = 'desert'
         \ | elseif &ft == "xml"
             \ | let b:colors_name = 'desert'
