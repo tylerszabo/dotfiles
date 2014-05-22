@@ -1,5 +1,6 @@
 #!/bin/sh
 
+DATESTAMP=`date +%s`
 REPODIR="`dirname \"$0\"`"
 
 if echo "$REPODIR" | grep '^\.' &>/dev/null ; then
@@ -16,7 +17,6 @@ for i in "$REPODIR/dotfiles/"* ; do
   TARGET="`sed -e \"s/^$PATTERN\\///\" <<< \"$i\"`"
   
   if [ -e "$DEST" -o -h "$DEST" ] ; then
-    DATESTAMP=`date +%s`
     mv "$DEST" "$DEST".bak-$DATESTAMP
   fi
   ln -s "$TARGET" "$DEST"
