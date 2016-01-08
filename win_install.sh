@@ -5,7 +5,7 @@ CYG_USERPROFILE=`cygpath "$USERPROFILE"/`
 DATESTAMP=`date +%s`
 
 # Must be Administrator to use MKLINK
-if ! id -G | grep '[^0-9]0[^0-9]' &>/dev/null ; then
+if ! id -Gnz | grep '^Administrators$' &>/dev/null ; then
   echo Not Administrator >&2
   exit 1
 fi
