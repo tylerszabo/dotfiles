@@ -4,7 +4,7 @@ syntax on
 set spell
 set hlsearch
 
-set statusline=%f%m%r%h%w\ [Format=%{&ff}]\ [Type=%Y]%=[%v,%l]
+set statusline=%f%m%r%h%w\ [%{''.(&fenc!=''?&fenc:&enc).''}\|%{&ff}]\ [%Y]%=[%v,%l](%p%%)
 set laststatus=2
 
 set autoindent
@@ -20,6 +20,10 @@ map <f12> :set spell!<CR>
 set nospell
 map <f11> :nohl<CR>
 set mouse=a
+
+" Print options
+set printoptions=syntax:n,number:y
+set printfont=Consolas:h8:cANSI " Windows font only
 
 colorscheme desert
 if has("gui_running")
