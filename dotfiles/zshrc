@@ -29,7 +29,12 @@ local WHOAMI=`whoami`
 unset RPROMPT
 autoload -Uz promptinit
 promptinit
-prompt adam2 black blue ${HOSTCOLOR} black
+
+if [[ -n "$MC_SID" ]] ; then
+  prompt suse
+else
+  prompt adam2 black blue ${HOSTCOLOR} black
+fi
 
 window_title () {
   TITLE="%M:%~$@"
