@@ -33,7 +33,7 @@ prompt adam2 black blue ${HOSTCOLOR} black
 
 window_title () {
   TITLE="%M:%~$@"
-  [[ "$TERM" == "xterm" ]] && print -Pn "\e]0;${TITLE}\a"
+  [[ "$TERM[1,5]" == "xterm" ]] && print -Pn "\e]0;${TITLE}\a"
 }
 
 window_title_exec () {
