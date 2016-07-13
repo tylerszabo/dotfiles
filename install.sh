@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 DATESTAMP=`date +%s`
 REPODIR="`dirname \"$0\"`"
