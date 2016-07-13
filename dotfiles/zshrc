@@ -134,6 +134,10 @@ done
 export PATH
 
 
+# Confiugre environment
+export EDITOR=vim
+
+
 ## Configure completion
 
 ## allow tab completion in the middle of a word
