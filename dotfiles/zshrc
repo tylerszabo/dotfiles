@@ -167,6 +167,8 @@ bindkey -M vicmd v edit-command-line
 
 [[ -e ${HOME}/.aliases ]] && source ${HOME}/.aliases
 
+[[ -e /etc/zsh_command_not_found ]] && source /etc/zsh_command_not_found
+
 
 ## SVN PS1
 # Really basic
