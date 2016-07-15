@@ -26,10 +26,12 @@ local WHOAMI=`whoami`
 [[ ${WHOAMI} == 'tyler' ]] && HOSTCOLOR=green
 [[ ${WHOAMI} == 'szabo' ]] && HOSTCOLOR=green
 [[ ${WHOAMI} == 'tszabo' ]] && HOSTCOLOR=green
+[[ ${OSTYPE} == 'cygwin' ]] && (id | grep -q '\<544\>' 2>/dev/null) && HOSTCOLOR=red
 unset RPROMPT
 autoload -Uz promptinit
 promptinit
 
+[[ ${OSTYPE} == 'cygwin' ]] && (id | grep -q '\<544\>' 2>/dev/null) && WindowTitlePrefix="Administrator: "
 if [[ -n "$MC_SID" ]] ; then
   prompt suse
 else
@@ -37,7 +39,7 @@ else
 fi
 
 window_title () {
-  TITLE="%M:%~$@"
+  TITLE="$WindowTitlePrefix%M:%~$@"
   [[ "$TERM[1,5]" == "xterm" ]] && print -Pn "\e]0;${TITLE}\a"
 }
 
