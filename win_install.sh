@@ -1,6 +1,6 @@
 #!/bin/sh
 
-CYG_USERPROFILE=`cygpath "$USERPROFILE"/`
+CYG_USERPROFILE=`cygpath "$USERPROFILE"`
 
 DATESTAMP=`date +%s`
 
@@ -10,11 +10,11 @@ if ! id | grep -q '\<544\>' 2>/dev/null ; then
   exit 1
 fi
 
-if [ -e "$CYG_USERPROFILE/_vimrc" ] ; then
+if ls -d "$CYG_USERPROFILE/_vimrc" &>/dev/null ; then
   mv "$CYG_USERPROFILE/_vimrc" "$CYG_USERPROFILE/_vimrc.bak-$DATESTAMP"
 fi
 
-if [ -e "$CYG_USERPROFILE/vimfiles" ] ; then
+if ls -d "$CYG_USERPROFILE/vimfiles" &>/dev/null ; then
   mv "$CYG_USERPROFILE/vimfiles" "$CYG_USERPROFILE/vimfiles.bak-$DATESTAMP"
 fi
 
