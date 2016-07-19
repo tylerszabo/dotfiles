@@ -37,9 +37,9 @@ if has("gui_running")
     au BufEnter *
     \ if !exists('b:colors_name') && !exists('b:bg_type')
         \ | if &ft == ""
-            \ | let b:colors_name = 'desert'
+            \ | let b:colors_name = 'autumn'
         \ | elseif &ft == "xml"
-            \ | let b:colors_name = 'desert'
+            \ | let b:colors_name = 'ir_black'
         \ | elseif &ft == "dosbatch"
             \ | let b:colors_name = 'solarized'
             \ | let b:bg_type = 'dark'
