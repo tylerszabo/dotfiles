@@ -12,7 +12,7 @@ export LC_ALL="en_US.UTF-8"
 # export LC_ALL=$(locale -uU)
 
 # Uncomment this to disable daily auto-update & proxy checks on startup (not recommended!)
-# export DISABLE_CHECK_ON_STARTUP="true"
+export DISABLE_CHECK_ON_STARTUP="true"
 
 # Uncomment to increase/decrease the check connection timeout
 # export CHECK_TIMEOUT_IN_SECS=4
