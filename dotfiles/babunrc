@@ -32,3 +32,6 @@ export DISABLE_CHECK_ON_STARTUP="true"
 
 # Uncomment to enable bloda detection
 # export CYGWIN="nodosfilewarning mintty detect_bloda"
+
+# Support 64-bit Cygwin
+uname -m | grep -q x86_64 && export CYGWIN_VERSION=x86_64
