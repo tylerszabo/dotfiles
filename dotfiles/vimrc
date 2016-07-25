@@ -45,6 +45,8 @@ if has("gui_running")
         \ | elseif &ft == "dosbatch"
             \ | let b:colors_name = 'solarized'
             \ | let b:bg_type = 'dark'
+        \ | elseif &ft == "ps1"
+            \ | let b:colors_name = 'darkblue'
         \ | else
             \ | let b:colors_name = 'solarized'
             \ | let b:bg_type = 'dark'
