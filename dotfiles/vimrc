@@ -51,6 +51,8 @@ if has("gui_running")
             \ | let b:colors_name = 'autumn'
         \ | elseif &ft == "xml"
             \ | let b:colors_name = 'ir_black'
+        \ | elseif &ft == "dosini"
+            \ | let b:colors_name = 'evening'
         \ | elseif &ft == "dosbatch"
             \ | let b:colors_name = 'solarized'
             \ | let b:bg_type = 'dark'
