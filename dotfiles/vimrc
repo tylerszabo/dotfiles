@@ -47,6 +47,8 @@ if has("gui_running")
     \ if !exists('b:colors_name') && !exists('b:bg_type')
         \ | if &ft == ""
             \ | let b:colors_name = 'autumn'
+        \ | elseif &ft == "text"
+            \ | let b:colors_name = 'autumn'
         \ | elseif &ft == "xml"
             \ | let b:colors_name = 'ir_black'
         \ | elseif &ft == "dosbatch"
