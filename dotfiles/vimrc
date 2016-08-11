@@ -22,6 +22,9 @@ set smarttab
 set smartindent
 set tildeop
 
+" Rely on AutoFenc.vim
+set fileencodings=
+
 imap <f1> <esc>
 map <f12> :set spell!<CR>
 set nospell
