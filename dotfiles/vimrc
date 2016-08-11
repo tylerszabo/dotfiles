@@ -4,6 +4,18 @@ syntax on
 set spell
 set hlsearch
 
+" Rely on AutoFenc.vim
+set fileencodings=
+
+" Show dos-only line endings on read-only files
+" http://vim.wikia.com/wiki/Automatically_reload_files_with_mixed_line-endings_in_DOS_fileformat
+autocmd BufReadPost * nested
+  \ if !exists('b:reload_dos') && &ro && !&binary && &ff=='unix' && (0 < search('\r\%x00\?$', 'nc')) |
+  \   let b:reload_dos = 1 |
+  \   edit ++ff=dos |
+  \   set ff=dos |
+  \ endif
+
 set statusline=%f%m%r%h%w\ [%{''.(&fenc!=''?&fenc:&enc).''}\|%{&ff}]\ [%Y]%=[%v,%l](%p%%)
 set laststatus=2
 set directory=.,$TEMP
@@ -21,9 +33,6 @@ set tabstop=2
 set smarttab
 set smartindent
 set tildeop
-
-" Rely on AutoFenc.vim
-set fileencodings=
 
 imap <f1> <esc>
 map <f12> :set spell!<CR>
