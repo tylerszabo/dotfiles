@@ -16,7 +16,26 @@ autocmd BufReadPost * nested
   \   set ff=dos |
   \ endif
 
-set statusline=%f%m%r%h%w\ [%{''.(&fenc!=''?&fenc:&enc).''}\|%{&ff}]\ [%Y]%=[%v,%l](%p%%)
+set statusline=
+set statusline+=%f " Filename
+set statusline+=%m " [+] or [-] when modified/unmodifiable
+set statusline+=%r " [RO] when read-only
+set statusline+=%h " [Help] when in help
+set statusline+=%w " [Preview] when preview
+set statusline+=\ [
+set statusline+=%{&fenc!=''?&fenc:&enc} " File encoding
+set statusline+=%{(exists('b:autofenc_done')&&b:autofenc_done!='')?'*':''} " Mark re-intepreted
+set statusline+=\| 
+set statusline+=%{&ff} " Line endings
+set statusline+=%{exists('b:reload_dos')?'*':''} " Mark re-interpreted
+set statusline+=]
+set statusline+=\ [
+set statusline+=%Y " Filetype
+set statusline+=]
+set statusline+=%= " align right
+set statusline+=[%v,%l] " Line v (cur) of l (total)
+set statusline+=(%p%%) " Percent
+
 set laststatus=2
 set directory=.,$TEMP
 
