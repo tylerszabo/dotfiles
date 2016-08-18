@@ -4,8 +4,9 @@ syntax on
 set spell
 set hlsearch
 
-" Rely on AutoFenc.vim
-set fileencodings=
+set enc=utf-8
+set fileencoding=utf-8
+set fileencodings=ucs-bom,utf8,prc,utf-16,latin1
 
 " Show dos-only line endings on read-only files
 " http://vim.wikia.com/wiki/Automatically_reload_files_with_mixed_line-endings_in_DOS_fileformat
@@ -24,7 +25,6 @@ set statusline+=%h " [Help] when in help
 set statusline+=%w " [Preview] when preview
 set statusline+=\ [
 set statusline+=%{&fenc!=''?&fenc:&enc} " File encoding
-set statusline+=%{(exists('b:autofenc_done')&&b:autofenc_done!='')?'*':''} " Mark re-intepreted
 set statusline+=\| 
 set statusline+=%{&ff} " Line endings
 set statusline+=%{exists('b:reload_dos')?'*':''} " Mark re-interpreted
