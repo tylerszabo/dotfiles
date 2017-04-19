@@ -1,4 +1,4 @@
-set nomodeline
+set modeline
 set number
 syntax on
 set hlsearch
