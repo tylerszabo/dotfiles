@@ -1,7 +1,6 @@
 set nomodeline
 set number
 syntax on
-set spell
 set hlsearch
 
 set enc=utf-8
@@ -55,7 +54,7 @@ set tildeop
 
 imap <f1> <esc>
 map <f12> :set spell!<CR>
-set nospell
+set nospell " No spell check by default
 map <f11> :nohl<CR>
 set mouse=a
 
@@ -77,6 +76,7 @@ if has("gui_running")
             \ | let b:colors_name = 'autumn'
         \ | elseif &ft == "text"
             \ | let b:colors_name = 'autumn'
+            \ | set spell
         \ | elseif &ft == "xml"
             \ | let b:colors_name = 'ir_black'
         \ | elseif &ft == "dosini"
