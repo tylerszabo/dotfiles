@@ -32,8 +32,9 @@ set statusline+=\ [
 set statusline+=%Y " Filetype
 set statusline+=]
 set statusline+=%= " align right
-set statusline+=[%v,%l] " Line v (cur) of l (total)
-set statusline+=(%p%%) " Percent
+set statusline+=%o " byte count at cursor
+set statusline+=\ [%v,%l] " [virtual column v, line l]
+set statusline+=(%p%%) " Percent (by line)
 
 set laststatus=2
 set directory=.,$TEMP
