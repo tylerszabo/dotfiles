@@ -340,7 +340,7 @@ __git_ps1 ()
 			else
 				b="GIT_DIR!"
 			fi
-		elif [ "true" = "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
+		elif [ "true" = "$(git rev-parse --is-inside-work-tree 2>/dev/null)" -a ! -e "$g/info/sparse-checkout" ]; then
 			if [ -n "${GIT_PS1_SHOWDIRTYSTATE-}" ]; then
 				if [ "$(git config --bool bash.showDirtyState)" != "false" ]; then
 					git diff --no-ext-diff --quiet --exit-code || w="*"
