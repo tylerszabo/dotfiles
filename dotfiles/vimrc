@@ -71,7 +71,6 @@ set mouse=a
 set printoptions=syntax:n,number:y
 set printfont=Consolas:h8:cANSI " Windows font only
 
-colorscheme desert
 if has("gui_running")
 
   set guifont=Consolas:h10:cANSI
@@ -104,4 +103,6 @@ if has("gui_running")
     \ | if exists('b:bg_type')
       \ | let &background = b:bg_type
   augroup END
+else
+  colorscheme desert
 endif
