@@ -7,6 +7,9 @@ set enc=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf8,prc,utf-16,latin1
 
+" use "set eol" or "set noeol" to explicitly change the file's end-of-line format
+set nofixendofline
+
 " Show dos-only line endings on read-only files
 " http://vim.wikia.com/wiki/Automatically_reload_files_with_mixed_line-endings_in_DOS_fileformat
 autocmd BufReadPost * nested
