@@ -11,9 +11,10 @@
 	date = iso
 [core]
 	pager = less -+ -FRXS
-	editor = /usr/bin/vim
+	editor = vim
 	trustctime = false
 	filemode = false
+	whitespace = cr-at-eol
 [push]
 	default = matching
 [credential]
@@ -25,6 +26,8 @@
 	keepbackups = false
 	prompt = false
 	trustexitcode = false
+[diff]
+	tool = vimdiff
 [alias]
 	last = log -1 --stat
 	cp = cherry-pick
