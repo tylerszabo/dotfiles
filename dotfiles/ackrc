@@ -1,0 +1,19 @@
+## Output 
+--color
+--context=3
+
+## Types
+--type-add=powershell:ext:ps1,psm1
+
+# Build/Makefile
+--type-add=proj:is:sources
+--type-add=proj:is:dirs
+--type-add=proj:match:/\..*proj$/
+--type-add=proj:match:/makefile/
+--type-add=sln:ext:sln
+
+# Log
+--type-add=log:ext:err,wrn,log
+
+# JavaScript
+--ignore-file=ext:map
