@@ -1,45 +1,47 @@
 [user]
-	name = Tyler Szabo
-	email = tyler.szabo@gmail.com
+  name = Tyler Szabo
+  email = tyler.szabo@gmail.com
 [color]
-	branch = auto
-	diff = auto
-	pager = true
-	status = auto
-	ui = true
+  branch = auto
+  diff = auto
+  pager = true
+  status = auto
+  ui = true
 [log]
-	date = iso
+  date = iso
 [core]
-	pager = less -+ -FRXS
-	editor = vim
-	trustctime = false
-	filemode = false
-	whitespace = cr-at-eol
+  pager = less -+ -FRXS
+  editor = vim
+  trustctime = false
+  filemode = false
+  whitespace = cr-at-eol
+  eof = native
+  autocrlf = true
 [push]
-	default = matching
+  default = matching
 [credential]
-	helper = cache --timeout=3600
+  helper = cache --timeout=3600
 [merge]
-	tool = gvimdiff
+  tool = gvimdiff
 [mergetool]
-	keeptemporaries = false
-	keepbackups = false
-	prompt = false
-	trustexitcode = false
+  keeptemporaries = false
+  keepbackups = false
+  prompt = false
+  trustexitcode = false
 [diff]
-	tool = gvimdiff
+  tool = gvimdiff
 [alias]
-	last = log -1 --stat
-	cp = cherry-pick
-	co = checkout
-	cl = clone
-	ci = commit
-	st = status -sb
-	br = branch
-	unstage = reset HEAD --
-	dc = diff --cached
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
-	pushup = push --set-upstream origin HEAD
-	fetchap = fetch --all --prune
+  last = log -1 --stat
+  cp = cherry-pick
+  co = checkout
+  cl = clone
+  ci = commit
+  st = status -sb
+  br = branch
+  unstage = reset HEAD --
+  dc = diff --cached
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
+  pushup = push --set-upstream origin HEAD
+  fetchap = fetch --all --prune
 [pull]
-	ff = only
+  ff = only
