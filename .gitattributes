@@ -1,2 +1,3 @@
 * text eol=lf
 *.png -text
+/win_install.cmd text eol=crlf
