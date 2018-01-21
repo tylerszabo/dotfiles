@@ -48,7 +48,7 @@ function LinkDotFile {
                 Remove-Item -Path $Link -Confirm:$False -WhatIf:$WhatIf
             }
         } else {
-            Move-Item -Path $Link -Destination "$Link-$TimeStamp" -WhatIf:$WhatIf
+            Move-Item -Path $Link -Destination "$Link.bak-$TimeStamp" -WhatIf:$WhatIf
         }
     }
 
