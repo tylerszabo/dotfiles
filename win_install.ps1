@@ -12,9 +12,7 @@ Param (
     $WhatIf = $False
 )
 
-$DotFilesRoot = Join-Path -Path $Repo -ChildPath "dotfiles"
-
-$TimeStamp = (Get-Date -UFormat "%s").split(".")[0]
+$ErrorActionPreference = "Stop";
 
 function LinkDotFile {
     Param (
@@ -55,6 +53,18 @@ function LinkDotFile {
     if ($WhatIf) { Write-Host "WhatIf: Would create link: $Link -> $Target" } else {
         New-Item -ItemType SymbolicLink -Path $Link -Value $Target
     }
+}
+
+$DotFilesRoot = Join-Path -Path $Repo -ChildPath "dotfiles"
+
+$TimeStamp = (Get-Date -UFormat "%s").split(".")[0]
+
+# Test linking before trying the real thing
+$testfile = (Join-Path -Path $env:TEMP -ChildPath "deleteme-dotfiles-$TimeStamp.tmp")
+try {
+  LinkDotFile -Link $testfile -DotFile "vimrc"
+} catch { throw } finally {
+  Remove-Item -Path $testfile -Force -ErrorAction SilentlyContinue -WhatIf:$WhatIf
 }
 
 LinkDotFile -ProfileLink "_ackrc"       -DotFile "ackrc"
