@@ -79,33 +79,43 @@ if has("gui_running")
   set guifont=Consolas:h10:cANSI
   set guioptions=egm
 
+  function SetFTColor(force)
+    if a:force || !exists('b:colors_name')
+      if &ft == "text" || &ft == "txt" || &ft == ""
+        let b:colors_name = 'autumn'
+      elseif &ft == "xml"
+        let b:colors_name = 'ir_black'
+      elseif &ft == "dosini"
+        let b:colors_name = 'evening'
+      elseif &ft == "dosbatch"
+        let b:colors_name = 'solarized'
+        let b:bg_type = 'dark'
+      elseif &ft == "ps1"
+        let b:colors_name = 'darkblue'
+      elseif &ft == "netrw"
+        let b:colors_name = 'desert'
+      else
+        let b:colors_name = 'solarized'
+        let b:bg_type = 'dark'
+      endif
+    endif
+    execute 'colorscheme' b:colors_name
+    if exists('b:bg_type')
+      let &background = b:bg_type
+    endif
+  endfunction
+
   " From http://stackoverflow.com/questions/6510481/colorscheme-change-when-filetype-changes
   augroup ft_colorscheme
-    au BufEnter *
-    \ if !exists('b:colors_name') && !exists('b:bg_type')
-        \ | if &ft == ""
-            \ | let b:colors_name = 'autumn'
-        \ | elseif &ft == "text"
-            \ | let b:colors_name = 'autumn'
-            \ | set spell
-        \ | elseif &ft == "xml"
-            \ | let b:colors_name = 'ir_black'
-        \ | elseif &ft == "dosini"
-            \ | let b:colors_name = 'evening'
-        \ | elseif &ft == "dosbatch"
-            \ | let b:colors_name = 'solarized'
-            \ | let b:bg_type = 'dark'
-        \ | elseif &ft == "ps1"
-            \ | let b:colors_name = 'darkblue'
-        \ | else
-            \ | let b:colors_name = 'solarized'
-            \ | let b:bg_type = 'dark'
-        \ | endif
-    \ | endif
-    \ | exe 'colorscheme' b:colors_name
-    \ | if exists('b:bg_type')
-      \ | let &background = b:bg_type
+    autocmd!
+    autocmd FileType * call SetFTColor(1)
+    autocmd BufEnter * call SetFTColor(0)
   augroup END
 else
   colorscheme desert
 endif
+
+augroup ft_spellcheck
+  autocmd!
+  autocmd BufEnter * if &ft == "text" || &ft=="txt" || &ft == "" | set spell | else | set nospell
+augroup END
