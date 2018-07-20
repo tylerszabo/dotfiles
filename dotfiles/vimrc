@@ -91,7 +91,7 @@ if has("gui_running")
         let b:colors_name = 'solarized'
         let b:bg_type = 'dark'
       elseif &ft == "ps1"
-        let b:colors_name = 'darkblue'
+        let b:colors_name = 'codeschool'
       elseif &ft == "netrw"
         let b:colors_name = 'desert'
       else
