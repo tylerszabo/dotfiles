@@ -100,6 +100,7 @@ if has("gui_running")
       endif
     endif
     execute 'colorscheme' b:colors_name
+    let g:colors_name = b:colors_name " workaround for themes like codeschool that sets to 'Code School 3'
     if exists('b:bg_type')
       let &background = b:bg_type
     endif
