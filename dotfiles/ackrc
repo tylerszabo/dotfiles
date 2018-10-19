@@ -15,5 +15,8 @@
 # Log
 --type-add=log:ext:err,wrn,log
 
+# NFO
+--type-add=nfo:ext:nfo
+
 # JavaScript
 --ignore-file=ext:map
