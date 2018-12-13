@@ -39,6 +39,10 @@ set statusline+=%o " byte count at cursor
 set statusline+=\ [%v,%l] " [virtual column v, line l]
 set statusline+=(%p%%) " Percent (by line)
 
+" Vim command prompt tab completion settings
+set wildmode=list:longest
+set wildmenu
+
 set laststatus=2
 set directory=.,$TEMP
 
