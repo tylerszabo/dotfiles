@@ -20,7 +20,7 @@
 [push]
   default = matching
 [credential]
-  helper = cache --timeout=3600
+  helper = manager
 [merge]
   tool = gvimdiff
 [mergetool]
