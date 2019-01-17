@@ -63,6 +63,13 @@ try {
 }
 
 LinkDotFile -ProfileLink "_ackrc"     -DotFile "ackrc"
+if ($PSCmdlet.ShouldProcess("ACKRC", "Set env var")) {
+  [System.Environment]::SetEnvironmentVariable(
+    "ACKRC",
+    (Join-Path -Path $env:USERPROFILE -ChildPath '_ackrc'),
+    [System.EnvironmentVariableTarget]::User)
+}
+
 LinkDotFile -ProfileLink ".gitconfig" -DotFile "gitconfig"
 LinkDotFile -ProfileLink "_vimrc"     -DotFile "vimrc"
 LinkDotFile -ProfileLink "vimfiles"   -DotFile "vim"
