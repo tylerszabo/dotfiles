@@ -32,7 +32,9 @@ autoload -Uz promptinit
 promptinit
 
 [[ ${OSTYPE} == 'cygwin' ]] && (id | grep -q '\<544\>' 2>/dev/null) && WindowTitlePrefix="Administrator: "
+
 if [[ -n "$MC_SID" ]] ; then
+  # Set prompt for Midnight Commander
   prompt suse
 else
   prompt adam2 black blue ${HOSTCOLOR} black
