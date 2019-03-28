@@ -47,6 +47,10 @@ else
 fi
 
 # Load alias definitions
+if [ -f ~/.aliases ]; then
+  . ~/.aliases
+fi
+
 if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
 fi
