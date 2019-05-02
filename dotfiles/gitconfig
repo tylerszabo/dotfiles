@@ -45,5 +45,6 @@
   touches = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(magenta)%s%Creset %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --name-only
   pushup = push --set-upstream origin HEAD
   fetchap = fetch --all --prune
+  fixup = commit --amend --reset-author --no-edit
 [pull]
   ff = only
