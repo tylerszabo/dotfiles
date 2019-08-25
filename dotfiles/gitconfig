@@ -48,5 +48,6 @@
   pushup = push --set-upstream origin HEAD
   fetchap = fetch --all --prune
   fixup = commit --amend --reset-author --no-edit
+  tidy = clean -xd -e .vs -e *.swp :/
 [pull]
   ff = only
