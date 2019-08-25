@@ -12,6 +12,10 @@
 --type-add=proj:match:/makefile/
 --type-add=sln:ext:sln
 
+# Text
+--type-add=doc:ext:txt,md
+--type-add=doc:is:README
+
 # Log
 --type-add=log:ext:err,wrn,log
 
