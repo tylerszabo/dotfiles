@@ -30,6 +30,8 @@
   trustexitcode = false
 [diff]
   tool = gvimdiff
+  colorMoved = zebra
+  colorMovedWS = allow-indentation-change
 [alias]
   last = log -1 --stat
   cp = cherry-pick
