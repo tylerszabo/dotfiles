@@ -48,7 +48,7 @@
   pushup = push --set-upstream origin HEAD
   fetchap = fetch --all --prune
   fixup = commit --amend --reset-author --no-edit
-  tidy = clean -xd -e .vs -e *.swp :/
+  tidy = clean -xd -e .vs -e *.swp
   alias = config --get-regexp '^alias\\.'
   root-commits = rev-list --max-parents=0 --branches --remotes --tags
 [pull]
