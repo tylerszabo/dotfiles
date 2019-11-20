@@ -1,55 +1,55 @@
 [user]
-  name = Tyler Szabo
-  email = tyler@szabomail.ca
+	name = Tyler Szabo
+	email = tyler@szabomail.ca
 [color]
-  branch = auto
-  diff = auto
-  pager = true
-  status = auto
-  ui = true
+	branch = auto
+	diff = auto
+	pager = true
+	status = auto
+	ui = true
 [log]
-  date = iso
+	date = iso
 [core]
-  pager = less -+ -FRXS
-  editor = vim
-  trustctime = false
-  filemode = false
-  whitespace = cr-at-eol
-  eof = native
-  autocrlf = true
+	pager = less -+ -FRXS
+	editor = vim
+	trustctime = false
+	filemode = false
+	whitespace = cr-at-eol
+	eof = native
+	autocrlf = true
 [push]
-  default = matching
+	default = matching
 [credential]
-  helper = manager
+	helper = manager
 [merge]
-  tool = gvimdiff
+	tool = gvimdiff
 [mergetool]
-  keeptemporaries = false
-  keepbackups = false
-  prompt = false
-  trustexitcode = false
+	keeptemporaries = false
+	keepbackups = false
+	prompt = false
+	trustexitcode = false
 [diff]
-  tool = gvimdiff
-  colorMoved = zebra
-  colorMovedWS = allow-indentation-change
+	tool = gvimdiff
+	colorMoved = zebra
+	colorMovedWS = allow-indentation-change
 [alias]
-  last = log -1 --stat
-  cp = cherry-pick
-  co = checkout
-  cl = clone
-  ci = commit
-  st = status -sb
-  br = branch
-  unstage = reset HEAD --
-  dc = diff --cached
-  lg = log --graph --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
-  reflg = reflog --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset'
-  touches = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(magenta)%s%Creset %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --name-only
-  pushup = push --set-upstream origin HEAD
-  fetchap = fetch --all --prune
-  fixup = commit --amend --reset-author --no-edit
-  tidy = clean -xd -e .vs -e *.swp
-  alias = config --get-regexp '^alias\\.'
-  root-commits = rev-list --max-parents=0 --branches --remotes --tags
+	last = log -1 --stat
+	cp = cherry-pick
+	co = checkout
+	cl = clone
+	ci = commit
+	st = status -sb
+	br = branch
+	unstage = reset HEAD --
+	dc = diff --cached
+	lg = log --graph --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
+	reflg = reflog --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset'
+	touches = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(magenta)%s%Creset %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --name-only
+	pushup = push --set-upstream origin HEAD
+	fetchap = fetch --all --prune
+	fixup = commit --amend --reset-author --no-edit
+	tidy = clean -xd -e .vs -e *.swp
+	alias = config --get-regexp '^alias\\.'
+	root-commits = rev-list --max-parents=0 --branches --remotes --tags
 [pull]
-  ff = only
+	ff = only
