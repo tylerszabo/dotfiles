@@ -17,6 +17,8 @@
 	whitespace = cr-at-eol
 	eof = native
 	autocrlf = true
+	quotepath = false
+	commitGraph = true
 [push]
 	default = matching
 [credential]
@@ -53,3 +55,10 @@
 	root-commits = rev-list --max-parents=0 --branches --remotes --tags
 [pull]
 	ff = only
+[gc]
+	writeCommitGraph = true
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
