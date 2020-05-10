@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Set default file creation to rwxr-x---
 umask 022
 

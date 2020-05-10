@@ -1,8 +1,4 @@
-#
-# .zshrc is sourced in interactive shells.
-# It should contain commands to set up aliases,
-# functions, options, key bindings, etc.
-#
+#!/usr/bin/env zsh
 
 ## set Vi mode
 bindkey -v

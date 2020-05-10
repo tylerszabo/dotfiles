@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Add color
 eval "`dircolors -b \"$HOME/.dir_colors\"`"
 alias grep='grep --color=auto'
