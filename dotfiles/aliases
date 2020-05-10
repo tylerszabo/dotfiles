@@ -16,7 +16,14 @@ alias java='java -ea'
 # Other
 alias bdiff='vbindiff'
 alias mtrr='mtr --report --report-cycles=1'
-alias o='xdg-open'
 alias quit='exit'
 alias vi='vim'
 alias wtf='apropos'
+
+if [ $TERM_PROGRAM = vscode ]; then
+  alias o='psedit'
+elif [ -e /cygdrive/c/Windows/explorer.exe ]; then
+  alias o='explorer'
+else
+  alias o='xdg-open'
+fi
