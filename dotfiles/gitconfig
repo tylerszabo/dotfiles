@@ -19,6 +19,7 @@
 	autocrlf = true
 	quotepath = false
 	commitGraph = true
+	excludesfile = ~/.gitignore
 [push]
 	default = matching
 [credential]
