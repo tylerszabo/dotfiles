@@ -20,7 +20,7 @@ alias quit='exit'
 alias vi='vim'
 alias wtf='apropos'
 
-if [ $TERM_PROGRAM = vscode ]; then
+if [ "$TERM_PROGRAM" = "vscode" ]; then
   alias o='psedit'
 elif [ -e /cygdrive/c/Windows/explorer.exe ]; then
   alias o='explorer'
