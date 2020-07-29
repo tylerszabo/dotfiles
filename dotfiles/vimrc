@@ -7,6 +7,9 @@ set enc=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf8,prc,utf-16,latin1
 
+" Prefer LF line endings
+set fileformats=unix,dos
+
 " use "set eol" or "set noeol" to explicitly change the file's end-of-line format
 set nofixendofline
 

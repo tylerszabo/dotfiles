@@ -16,10 +16,11 @@
 	filemode = false
 	whitespace = cr-at-eol
 	eof = native
-	autocrlf = true
+	autocrlf = input
 	quotepath = false
 	commitGraph = true
 	excludesfile = ~/.gitignore
+	eol = lf
 [push]
 	default = matching
 [credential]
