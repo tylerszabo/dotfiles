@@ -20,6 +20,7 @@
 	quotepath = false
 	commitGraph = true
 	excludesfile = ~/.gitignore
+	ignorecase = false
 	eol = lf
 [push]
 	default = matching
