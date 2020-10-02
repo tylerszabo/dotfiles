@@ -38,20 +38,8 @@
 	colorMoved = zebra
 	colorMovedWS = allow-indentation-change
 [alias]
-	last = log -1 --stat
-	cp = cherry-pick
-	co = checkout
-	cl = clone
-	ci = commit
-	st = status -sb
-	br = branch
-	unstage = reset HEAD --
-	dc = diff --cached
 	lg = log --graph --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
-	reflg = reflog --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset'
-	touches = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(magenta)%s%Creset %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --name-only
 	pushup = push --set-upstream origin HEAD
-	fetchap = fetch --all --prune
 	fixup = commit --amend --reset-author --no-edit
 	tidy = clean -xd -e .vs -e *.swp
 	alias = config --get-regexp '^alias\\.'
