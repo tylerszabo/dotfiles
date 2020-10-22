@@ -15,7 +15,6 @@
 	trustctime = false
 	filemode = false
 	whitespace = cr-at-eol
-	eof = native
 	autocrlf = input
 	quotepath = false
 	commitGraph = true
