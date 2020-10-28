@@ -140,7 +140,8 @@ export PATH
 
 
 # Confiugre environment
-export EDITOR=vim
+where vi &>/dev/null && export EDITOR=vi
+where vim &>/dev/null && export EDITOR=vim
 
 
 ## Configure completion
