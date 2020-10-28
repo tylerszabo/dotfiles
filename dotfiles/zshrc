@@ -166,13 +166,16 @@ zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
 
+## Command Not Found Handler
+
+[[ -x /usr/lib/command-not-found ]] && command_not_found_handler() { /usr/lib/command-not-found -- "$1" }
+
+
 ## Include other files
 
 [[ -e ${HOME}/.shortcuts ]] && source ${HOME}/.shortcuts
 
 [[ -e ${HOME}/.aliases ]] && source ${HOME}/.aliases
-
-[[ -e /etc/zsh_command_not_found ]] && source /etc/zsh_command_not_found
 
 
 ## SVN PS1
