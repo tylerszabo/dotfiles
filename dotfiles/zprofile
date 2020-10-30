@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+if [[ -f ~/.profile ]]; then
+  . ~/.profile
+else
+  echo ".zprofile: missing .profile" >&2
+fi

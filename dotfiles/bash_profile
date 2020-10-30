@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 
-# include .bashrc if it exists
+# This file is executed by Bash login shells
+
+# include .profile - for generic Bourne-compatible shell config
+if [ -f ~/.profile ]; then
+  . ~/.profile
+else
+  echo ".bash_profile: missing .profile" >&2
+fi
+
 if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
+  . ~/.bashrc
+else
+  echo ".bash_profile: missing .bashrc" >&2
 fi

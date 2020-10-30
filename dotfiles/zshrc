@@ -117,28 +117,6 @@ setopt HIST_VERIFY
 setopt INC_APPEND_HISTORY
 
 
-## Configure Path
-
-pathdel() {
-  local pos=${path[(i)${1}]}
-  [[ ${pos} -le ${#path} ]] && path[${pos}]=()
-}
-
-pathadd () {
-  [[ -d "${1}" ]] && { pathdel "${1}" ; path=("${1}" "$path[@]") }
-}
-
-## Add home bin last for highest affinity
-pathadd "${HOME}/bin"
-
-## remove dupes and dead paths then export
-typeset -U path
-for i in $path ; do
-  [[ -d "$i" ]] || pathdel $i
-done
-export PATH
-
-
 # Confiugre environment
 where vi &>/dev/null && export EDITOR=vi
 where vim &>/dev/null && export EDITOR=vim

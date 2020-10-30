@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+# Clear the screen on logout
+if [[ "$SHLVL" = 1 ]]; then
+  if [[ -x /usr/bin/clear ]]; then
+    /usr/bin/clear
+  else if [[ -x /usr/bin/clear_console ]]
+    /usr/bin/clear_console -q
+  fi
+fi
