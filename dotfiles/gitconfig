@@ -21,6 +21,7 @@
 	excludesfile = ~/.gitignore
 	ignorecase = false
 	eol = lf
+	safecrlf = warn
 [push]
 	default = matching
 [credential]
