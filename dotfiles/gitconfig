@@ -18,7 +18,6 @@
 	autocrlf = input
 	quotepath = false
 	commitGraph = true
-	excludesfile = ~/.gitignore
 	ignorecase = false
 	eol = lf
 	safecrlf = warn

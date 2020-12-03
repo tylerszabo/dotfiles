@@ -31,7 +31,36 @@ function LinkDotFile {
     $Link = (Join-Path -Path $env:USERPROFILE -ChildPath $ProfileLink)
   }
 
-  if (-Not $Link) { Throw "No link location. $ArgString" }
+  SafeLink -Link $Link -Target $Target
+}
+
+function LinkXdgConfigFile {
+  Param (
+    $XDGConfigFile
+  )
+
+  if (-Not $XDGConfigFile) { Throw "XDGConfigFile not specified" }
+
+  $Target = (Join-Path -Path $XDGConfigRoot -ChildPath $XDGConfigFile)
+
+  if (-Not (Test-Path -Path $Target)) { Throw "Target $Target doesn't exist for $XDGConfigFile" }
+
+  $XDGConfigHome = $env:XDG_CONFIG_HOME
+  if (-Not $XDGConfigHome) {
+    $XDGConfigHome = (Join-Path -Path "$env:USERPROFILE" -ChildPath ".config")
+  }
+  $Link = (Join-Path -Path $XDGConfigHome -ChildPath $XDGConfigFile)
+
+  SafeLink -Link $Link -Target $Target
+}
+
+function SafeLink {
+  Param(
+    $Link,
+    $Target
+  )
+
+  if (-Not $Link) { Throw "No link location." }
 
   if (Test-Path -Path $Link) {
     if ($Overwrite) {
@@ -43,7 +72,7 @@ function LinkDotFile {
         Remove-Item -Path $Link -Confirm:$False
       }
     } else {
-      Move-Item -Path $Link -Destination "$Link.bak-$TimeStamp"
+      Rename-Item -Path $Link -NewName "$Link.bak-$TimeStamp"
     }
   }
 
@@ -51,6 +80,7 @@ function LinkDotFile {
 }
 
 $DotFilesRoot = Join-Path -Path $Repo -ChildPath "dotfiles"
+$XDGConfigRoot = Join-Path -Path $Repo -ChildPath "xdg_config"
 
 $TimeStamp = (Get-Date -UFormat "%s").split(".")[0]
 
@@ -63,7 +93,7 @@ try {
 }
 
 LinkDotFile -ProfileLink "_ackrc"     -DotFile "ackrc"
-if ($PSCmdlet.ShouldProcess("ACKRC", "Set env var")) {
+if (-Not $env:ACKRC -And $PSCmdlet.ShouldProcess("ACKRC", "Set env var")) {
   [System.Environment]::SetEnvironmentVariable(
     "ACKRC",
     (Join-Path -Path $env:USERPROFILE -ChildPath '_ackrc'),
@@ -73,3 +103,5 @@ if ($PSCmdlet.ShouldProcess("ACKRC", "Set env var")) {
 LinkDotFile -ProfileLink ".gitconfig" -DotFile "gitconfig"
 LinkDotFile -ProfileLink "_vimrc"     -DotFile "vimrc"
 LinkDotFile -ProfileLink "vimfiles"   -DotFile "vim"
+
+LinkXdgConfigFile -XDGConfigFile "git"
