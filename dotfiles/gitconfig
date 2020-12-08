@@ -55,3 +55,6 @@
 	smudge = git-lfs smudge -- %f
 [init]
 	defaultBranch = main
+[diff "pandoc"]
+	textconv = pandoc --wrap=none --to=markdown
+	prompt = false
