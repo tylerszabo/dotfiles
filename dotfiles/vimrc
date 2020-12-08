@@ -77,10 +77,6 @@ set nospell " No spell check by default
 map <f11> :nohl<CR>
 set mouse=a
 
-" Print options
-set printoptions=syntax:n,number:y
-set printfont=Consolas:h8:cANSI " Windows font only
-
 if has("gui_running")
 
   set guifont=Consolas:h10:cANSI
@@ -127,3 +123,7 @@ augroup ft_spellcheck
   autocmd!
   autocmd BufEnter * if &ft == "text" || &ft=="txt" || &ft == "" | set spell | else | set nospell
 augroup END
+
+" Print options
+set printoptions=syntax:n,number:y
+set printfont=Consolas:h8:cANSI " Windows font only
