@@ -80,7 +80,7 @@ set mouse=a
 if has("win32")
   let s:font = "Consolas:h<SIZE>:cANSI"
 elseif has("gui_gtk2") || has("gui_gtk3")
-  let s:font = "DejaVu\ Sans\ Mono\ <SIZE>,Monospace\ <SIZE>"
+  let s:font = "Fira\ Code\ Retina\ <SIZE>,Fira\ Code\ <SIZE>,Inconsolata\ <SIZE>,DejaVu\ Sans\ Mono\ <SIZE>,Monospace\ <SIZE>"
 endif
 
 function GetFontString(size)
