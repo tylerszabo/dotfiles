@@ -2,6 +2,7 @@
 
 DATESTAMP=`date +%s`
 REPODIR="`dirname \"$0\"`"
+XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 
 if echo "$REPODIR" | grep '^\.' &>/dev/null ; then
   REPODIR="`echo \"$REPODIR\" | sed -e 's/^\\.//'`"
@@ -14,20 +15,15 @@ for i in "$REPODIR/dotfiles/"* ; do
 
   PATTERN="`sed -e 's:/:\\\\/:g' <<< "$HOME"`"
 
-  TARGET="`sed -e \"s/^$PATTERN\\///\" <<< \"$i\"`"
-
   if [ -e "$DEST" -o -h "$DEST" ] ; then
     mv "$DEST" "$DEST".bak-$DATESTAMP
   fi
-  ln -s "$TARGET" "$DEST"
+
+  ln -s "$i" "$DEST"
 done
 
 for i in "$REPODIR/xdg_config/"* ; do
   FILE=`basename "$i"`
-
-  if [ ! -n "$XDG_CONFIG_HOME" ] ; then
-    XDG_CONFIG_HOME="$HOME/.config"
-  fi
 
   if [ ! -e "$XDG_CONFIG_HOME" ] ; then
     mkdir -p "$XDG_CONFIG_HOME"
@@ -37,10 +33,9 @@ for i in "$REPODIR/xdg_config/"* ; do
 
   PATTERN="`sed -e 's:/:\\\\/:g' <<< "$HOME"`"
 
-  TARGET="`sed -e \"s/^$PATTERN\\///\" <<< \"$i\"`"
-
   if [ -e "$DEST" -o -h "$DEST" ] ; then
     mv "$DEST" "$DEST".bak-$DATESTAMP
   fi
-  ln -s "$TARGET" "$DEST"
+
+  ln -s "$i" "$DEST"
 done
