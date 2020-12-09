@@ -84,7 +84,11 @@ elseif has("gui_gtk2") || has("gui_gtk3")
 endif
 
 function GetFontString(size)
-  return substitute(s:font, "<SIZE>", a:size, "g")
+  if exists('s:font')
+    return substitute(s:font, "<SIZE>", a:size, "g")
+  else
+    return ""
+  endif
 endfunction
 
 if has("gui_running")
