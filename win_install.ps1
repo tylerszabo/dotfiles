@@ -1,3 +1,5 @@
+#Requires -RunAsAdministrator
+
 [CmdletBinding(SupportsShouldProcess = $True, DefaultParameterSetName="None")]
 Param (
   [Parameter(Mandatory=$True,Position=1,ParameterSetName="RepoPath")]
@@ -49,6 +51,14 @@ function LinkXdgConfigFile {
   if (-Not $XDGConfigHome) {
     $XDGConfigHome = (Join-Path -Path "$env:USERPROFILE" -ChildPath ".config")
   }
+
+  if (-Not (Test-Path -Path $XDGConfigHome)) {
+    $NewDir = New-Item -Type Directory -Path $XDGConfigHome
+    $NewDirAcl = $NewDir | Get-Acl
+    $NewDirAcl.SetOwner([System.Security.Principal.WindowsIdentity]::GetCurrent().User)
+    $NewDir | Set-Acl -AclObject $NewDirAcl
+  }
+
   $Link = (Join-Path -Path $XDGConfigHome -ChildPath $XDGConfigFile)
 
   SafeLink -Link $Link -Target $Target
