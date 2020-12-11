@@ -10,7 +10,7 @@
 [log]
 	date = iso
 [core]
-	pager = less -+ -FRXS
+	pager = less -+ --no-init --quit-if-one-screen --chop-long-lines --raw-control-chars
 	editor = vim
 	trustctime = false
 	filemode = false
@@ -43,7 +43,7 @@
 	tidy = clean -xd -e .vs -e *.swp
 	alias = config --get-regexp '^alias\\.'
 	root-commits = rev-list --max-parents=0 --branches --remotes --tags
-	s = status -s
+	s = status --short
 	dc = diff --cached
 [pull]
 	ff = only
