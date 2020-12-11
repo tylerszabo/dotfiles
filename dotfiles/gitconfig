@@ -10,7 +10,7 @@
 [log]
 	date = iso
 [core]
-	pager = less -+ --no-init --quit-if-one-screen --chop-long-lines --raw-control-chars
+	pager = less -+ --no-init --quit-if-one-screen --quit-on-intr --chop-long-lines --raw-control-chars
 	editor = vim
 	trustctime = false
 	filemode = false
