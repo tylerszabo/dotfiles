@@ -44,6 +44,7 @@
 	alias = config --get-regexp '^alias\\.'
 	root-commits = rev-list --max-parents=0 --branches --remotes --tags
 	s = status -s
+	dc = diff --cached
 [pull]
 	ff = only
 [gc]
