@@ -71,6 +71,9 @@ set tabstop=2
 
 set tildeop
 
+let mapleader = "\\"
+let maplocalleader = "."
+
 imap <f1> <esc>
 map <f12> :set spell!<CR>
 set nospell " No spell check by default
