@@ -138,6 +138,8 @@ augroup ft_spellcheck
   autocmd BufEnter * if &ft == "text" || &ft=="txt" || &ft == "" | set spell | else | set nospell
 augroup END
 
+filetype plugin on
+
 " Print options
 set printoptions=syntax:n,number:y
 let &printfont = GetFontString("8")
