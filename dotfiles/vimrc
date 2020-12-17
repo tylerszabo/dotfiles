@@ -78,6 +78,14 @@ imap <f1> <esc>
 map <f12> :set spell!<CR>
 set nospell " No spell check by default
 map <f11> :nohl<CR>
+
+" Ctrl-V to paste in insert or command mode
+noremap! <c-v> <c-r>+
+" Ctrl-X/Ctrl-C/Ctrl-V to cut/copy/paste, respectively in visual mode
+vnoremap <c-x> "+d
+vnoremap <c-c> "+y
+vnoremap <c-v> "+p
+
 set mouse=a
 
 let s:font = ""
