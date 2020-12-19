@@ -133,6 +133,12 @@ zstyle ':completion:*' use-compctl true
 autoload -U compinit
 compinit
 
+# The ESC+/ chord added by compinit conflicts with ESC (vi-cmd-mode) followed by / (search) vi-history-search-backward
+# Waiting between pressing ESC and pressing / and possibly adjusting KEYTIMEOUT will also work
+# See https://superuser.com/questions/476532/how-can-i-make-zshs-vi-mode-behave-more-like-bashs-vi-mode
+bindkey -M viins -r "^[/"
+bindkey -M viins "^[." _history-complete-newer
+
 
 ## Configure ZLE
 
