@@ -69,8 +69,6 @@ __versioncontrol_ps1 () {
 
   if vcs_info ; then
     echo -n "-${vcs_info_msg_0_}"
-  else
-    echo -n "$(__svn_ps1 '-(svn)-(%s)')"
   fi
 }
 
@@ -155,21 +153,6 @@ bindkey -M vicmd v edit-command-line
 [[ -e ${HOME}/.shortcuts ]] && source ${HOME}/.shortcuts
 
 [[ -e ${HOME}/.aliases ]] && source ${HOME}/.aliases
-
-
-## SVN PS1
-# Really basic
-
-__svn_ps1() {
-  if svn info --non-interactive &>/dev/null ; then
-    local rev=`svn info --non-interactive | awk '/Revision:/ {print $2}'`
-    local branchtag=""
-    local flag_changed=`{svn status | grep '.'} &>/dev/null && echo -n \*`
-
-    local flags=$flag_changed
-		printf "${1:- (%s)}" "${branchtag:+$branchtag:}$rev${flags:+ $flags}"
-  fi
-}
 
 
 ## Include Git completion content directly for now
