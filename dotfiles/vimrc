@@ -116,7 +116,7 @@ if has("gui_running")
       elseif &ft == "netrw"
         let b:colors_name = 'desert'
       elseif &ft == "todo"
-        let b:colors_name = 'ir_black'
+        let b:colors_name = 'koehler'
       else
         let b:colors_name = 'solarized'
         let b:bg_type = 'dark'
