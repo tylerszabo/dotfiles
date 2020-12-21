@@ -33,18 +33,21 @@
 
 function s:X_Mas()
   highlight xmasSyntax guifg=#00ff00 guibg=#800000 ctermfg=LightGreen ctermbg=Red term=italic cterm=italic gui=italic
-  highlight xmasSyntax2 guifg=#00e000 guibg=#600000 ctermfg=LightGreen ctermbg=DarkRed
+  highlight xmasSyntax2 guifg=#00e000 guibg=#600000 ctermfg=LightGreen ctermbg=DarkRed term=italic cterm=italic gui=italic
 
   syntax clear xmasSyntax
   syntax clear xmasSyntax2
 
-  if strftime("%m") == 12
+  "if strftime("%m") == 12
     syntax match xmasSyntax containedin=ALL /\c\<\(Christmas\|Noël\|X[ -]\?mas\)\>/
     syntax match xmasSyntax2 containedin=xmasSyntax contained /\c[crsmxnë]/
-  endif
+  "endif
 endfunction
 
 augroup x_mas
   autocmd!
+  autocmd FileType * call s:X_Mas()
   autocmd BufEnter * call s:X_Mas()
 augroup END
+
+call s:X_Mas()
