@@ -70,9 +70,9 @@ set softtabstop=2
 set tabstop=2
 
 if has("multi_byte")
-  set listchars=extends:❯,precedes:❮,trail:▕
+  set listchars=tab:──▶,extends:❯,precedes:❮,trail:▕
 else
-  set listchars=extends:>,precedes:<
+  set listchars=tab:-->,extends:>,precedes:<
 endif
 set list
 
