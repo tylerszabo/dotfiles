@@ -1,0 +1,3 @@
+[submodule "dotfiles/vim/pack/dbeniamine-todo.txt/start/todo.txt"]
+	path = dotfiles/vim/pack/dbeniamine-todo.txt/start/todo.txt
+	url = https://github.com/tylerszabo/todo.txt-vim.git
