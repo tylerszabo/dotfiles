@@ -94,6 +94,10 @@ vnoremap <c-x> "+d
 vnoremap <c-c> "+y
 vnoremap <c-v> "+p
 
+let g:netrw_nogx=1
+nmap gx <Plug>(openbrowser-smart-search)
+vmap gx <Plug>(openbrowser-smart-search)
+
 set mouse=a
 
 let s:font = ""

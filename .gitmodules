@@ -1,3 +1,6 @@
 [submodule "dbeniamine-todo.txt"]
 	path = dotfiles/vim/pack/dbeniamine-todo.txt/start/todo.txt
 	url = https://github.com/tylerszabo/todo.txt-vim.git
+[submodule "tyru-open-browser.vim"]
+	path = dotfiles/vim/pack/tyru-open-browser/start/open-browser
+	url = https://github.com/tylerszabo/open-browser.vim.git
