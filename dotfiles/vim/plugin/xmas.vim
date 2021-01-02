@@ -38,10 +38,10 @@ function s:X_Mas()
   syntax clear xmasSyntax
   syntax clear xmasSyntax2
 
-  "if strftime("%m") == 12
+  if strftime("%m") == 12
     syntax match xmasSyntax containedin=ALL /\c\<\(Christmas\|Noël\|X[ -]\?mas\)\>/
     syntax match xmasSyntax2 containedin=xmasSyntax contained /\c[crsmxnë]/
-  "endif
+  endif
 endfunction
 
 augroup x_mas
