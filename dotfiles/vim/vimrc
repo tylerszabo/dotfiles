@@ -104,7 +104,7 @@ let s:font = ""
 if has("win32")
   let s:font = "Cascadia_Code:h<SIZE>:cANSI:qDRAFT,Cascadia_Mono:h<SIZE>:cANSI:qDRAFT,DejaVu_Sans_Mono:h<SIZE>:cANSI:qDRAFT,Consolas:h<SIZE>:cANSI"
 elseif has("gui_gtk2") || has("gui_gtk3")
-  let s:font = "Cascadia\ Code\ <SIZE>\,Cascadia\ Mono\ <SIZE>\,Fira\ Code\ Retina\ <SIZE>\,Fira\ Code\ <SIZE>\,DejaVu\ Sans\ Mono\ <SIZE>\,Monospace\ <SIZE>"
+  let s:font = "Cascadia\ Code\\,Cascadia\ Mono\\,Fira\ Code\ Retina\\,Fira\ Code,DejaVu\ Sans\ Mono\\,Monospace\ <SIZE>"
 endif
 
 if has("gui_running")
