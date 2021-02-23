@@ -97,7 +97,7 @@ $TimeStamp = (Get-Date -UFormat "%s").split(".")[0]
 # Test linking before trying the real thing
 $testfile = (Join-Path -Path $env:TEMP -ChildPath "deleteme-dotfiles-$TimeStamp.tmp")
 try {
-  LinkDotFile -Link $testfile -DotFile "vimrc" | Out-Null
+  LinkDotFile -Link $testfile -DotFile "vim/vimrc" | Out-Null
 } catch { throw } finally {
   Remove-Item -Path $testfile -Force -ErrorAction SilentlyContinue
 }
@@ -111,7 +111,6 @@ if (-Not $env:ACKRC -And $PSCmdlet.ShouldProcess("ACKRC", "Set env var")) {
 }
 
 LinkDotFile -ProfileLink ".gitconfig" -DotFile "gitconfig"
-LinkDotFile -ProfileLink "_vimrc"     -DotFile "vimrc"
 LinkDotFile -ProfileLink "vimfiles"   -DotFile "vim"
 
 LinkXdgConfigFile -XDGConfigFile "git"
