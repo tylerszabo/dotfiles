@@ -3,7 +3,7 @@ set number
 syntax on
 set hlsearch
 
-set enc=utf-8
+set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf8,prc,utf-16,latin1
 
@@ -100,18 +100,7 @@ vmap gx <Plug>(openbrowser-smart-search)
 
 set mouse=a
 
-let s:font = ""
-if has("win32")
-  let s:font = "Cascadia_Code:h<SIZE>:cANSI:qDRAFT,Cascadia_Mono:h<SIZE>:cANSI:qDRAFT,DejaVu_Sans_Mono:h<SIZE>:cANSI:qDRAFT,Consolas:h<SIZE>:cANSI"
-elseif has("gui_gtk2") || has("gui_gtk3")
-  let s:font = "Cascadia\ Code\\,Cascadia\ Mono\\,Fira\ Code\ Retina\\,Fira\ Code,DejaVu\ Sans\ Mono\\,Monospace\ <SIZE>"
-endif
-
 if has("gui_running")
-
-  let &guifont = substitute(s:font, "<SIZE>", "10", "g")
-  set guioptions=egm
-
   function SetFTColor(force)
     if a:force || !exists('b:colors_name')
       if &ft == "text" || &ft == "txt" || &ft == ""
@@ -147,8 +136,6 @@ if has("gui_running")
     autocmd FileType * call SetFTColor(1)
     autocmd BufEnter * call SetFTColor(0)
   augroup END
-else
-  colorscheme desert
 endif
 
 augroup ft_spellcheck
@@ -157,7 +144,3 @@ augroup ft_spellcheck
 augroup END
 
 filetype plugin on
-
-" Print options
-set printoptions=syntax:n,number:y
-let &printfont = substitute(s:font, "<SIZE>", "8", "g")

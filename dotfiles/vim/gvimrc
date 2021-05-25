@@ -1,0 +1,18 @@
+set guioptions=eimg
+
+if has("gui_win32") && &encoding == "utf-8"
+  set renderoptions=type:directx,gamma:1.0,contrast:1.0,level:1.0,renmode:0,taamode:0
+endif
+
+if !&guifont
+  let s:font_size = 10
+  let s:font_families = ["Cascadia Code", "Cascadia Mono", "Fira Code Retina", "Fira Code", "DejaVu Sans Mono"]
+
+  if has("win32")
+    let &guifont = join(map(add(s:font_families,"Consolas"), 'substitute(v:val, " ", "_", "g").":h".s:font_size.":cANSI:qPROOF"'), ",")
+
+  elseif has("gui_gtk2") || has("gui_gtk3")
+    let &guifont = join(add(s:font_families,"Monospace"), "\\,")." ".s:font_size
+
+  endif
+endif
