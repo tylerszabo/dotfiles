@@ -40,3 +40,13 @@ fi
 if [ -f /etc/bash_completion ]; then
   . /etc/bash_completion
 fi
+
+## Configure custom locale
+
+if [ -e "$HOME/.locale/en_ZZ.UTF-8" ]; then
+  export LOCPATH=$HOME/.locale/
+  export LANG=en_ZZ.UTF-8
+fi
+
+# A nicer default for coreutils
+export TIME_STYLE=long-iso

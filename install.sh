@@ -3,6 +3,7 @@
 DATESTAMP=`date +%s`
 REPODIR="`dirname \"$0\"`"
 XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+LOCALE_DIR=$HOME/.locale
 
 if echo "$REPODIR" | grep '^\.' &>/dev/null ; then
   REPODIR="`echo \"$REPODIR\" | sed -e 's/^\\.//'`"
@@ -39,3 +40,11 @@ for i in "$REPODIR/xdg_config/"* ; do
 
   ln -s "$i" "$DEST"
 done
+
+if [ -e "$LOCALE_DIR" ] ; then
+  mv "$LOCALE_DIR" "$LOCALE_DIR".bak-$DATESTAMP
+fi
+mkdir -p "$LOCALE_DIR"
+localedef -f "UTF-8" -i "$REPODIR/locales/en_ZZ" "$LOCALE_DIR/en_ZZ.UTF-8"
+localedef -f "UTF-8" -i C "$LOCALE_DIR/C.UTF-8"
+localedef -f "UTF-8" -i en_US "$LOCALE_DIR/en_US.UTF-8"
