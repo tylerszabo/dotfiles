@@ -23,8 +23,6 @@
 	safecrlf = warn
 [push]
 	default = matching
-[credential]
-	helper = manager
 [merge]
 	tool = gvimdiff
 [mergetool]
