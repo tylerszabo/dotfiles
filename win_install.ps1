@@ -1,5 +1,3 @@
-#Requires -RunAsAdministrator
-
 [CmdletBinding(SupportsShouldProcess = $True, DefaultParameterSetName="None")]
 Param (
   [Parameter(Mandatory=$True,Position=1,ParameterSetName="RepoPath")]
@@ -13,64 +11,35 @@ Param (
 
 $ErrorActionPreference = "Stop";
 
-function LinkDotFile {
-  Param (
-    $ProfileLink,
-    $Link,
-    $DotFile
-  )
+$DotFilesRoot = Join-Path -Path $Repo -ChildPath "dotfiles"
+$XDGConfigRoot = Join-Path -Path $Repo -ChildPath "xdg_config"
+$TimeStamp = (Get-Date -UFormat "%s").split(".")[0]
+$BackupDir = Join-Path -Path "$env:USERPROFILE" -ChildPath "dotfiles-backups-$TimeStamp"
+$XdgBackupDir = Join-Path -Path $BackupDir -ChildPath "xdg_config_backups"
 
-  $ArgString = "ProfileLink=$ProfileLink Link=$Link DotFile=$DotFile"
-
-  if (-Not $DotFile) { Throw "Target not specified $ArgString" }
-
-  $Target = (Join-Path -Path $DotFilesRoot -ChildPath $DotFile)
-
-  if (-Not (Test-Path -Path $Target)) { Throw "Target doesn't exist $ArgString" }
-
-  if ($ProfileLink) {
-    if ($Link) { Throw "Ambiguous link location. $ArgString" }
-    $Link = (Join-Path -Path $env:USERPROFILE -ChildPath $ProfileLink)
-  }
-
-  SafeLink -Link $Link -Target $Target
+$XdgConfigHome = $env:XDG_CONFIG_HOME
+if (-Not $XdgConfigHome) {
+  $XdgConfigHome = Join-Path -Path $env:USERPROFILE -ChildPath ".config"
 }
 
-function LinkXdgConfigFile {
-  Param (
-    $XDGConfigFile
-  )
-
-  if (-Not $XDGConfigFile) { Throw "XDGConfigFile not specified" }
-
-  $Target = (Join-Path -Path $XDGConfigRoot -ChildPath $XDGConfigFile)
-
-  if (-Not (Test-Path -Path $Target)) { Throw "Target $Target doesn't exist for $XDGConfigFile" }
-
-  $XDGConfigHome = $env:XDG_CONFIG_HOME
-  if (-Not $XDGConfigHome) {
-    $XDGConfigHome = (Join-Path -Path "$env:USERPROFILE" -ChildPath ".config")
-  }
-
-  if (-Not (Test-Path -Path $XDGConfigHome)) {
-    $NewDir = New-Item -Type Directory -Path $XDGConfigHome
-    $NewDirAcl = $NewDir | Get-Acl
-    $NewDirAcl.SetOwner([System.Security.Principal.WindowsIdentity]::GetCurrent().User)
-    $NewDir | Set-Acl -AclObject $NewDirAcl
-  }
-
-  $Link = (Join-Path -Path $XDGConfigHome -ChildPath $XDGConfigFile)
-
-  SafeLink -Link $Link -Target $Target
+if (-Not ($XdgConfigHome) -Or -Not (Test-Path -Path $XdgConfigHome -Type Container)) {
+  Throw "XDG_CONFIG_HOME path `"$XDG_CONFIG_HOME`" is not a directory"
 }
+
+New-Item -Type Directory -Path $BackupDir | Out-Null
+New-Item -Type Directory -Path $XdgBackupDir | Out-Null
+
 
 function SafeLink {
   Param(
     $Link,
-    $Target
+    $Target,
+    $BackupDest = $BackupDir
   )
 
-  if (-Not $Link) { Throw "No link location." }
+  Write-Verbose "Attempting to link $Link->$Target (Backup to $BackupDest)"
+
+  if (-Not $Link -Or -Not $Target) { Throw "Invalid arguments" }
 
   if (Test-Path -Path $Link) {
     if ($Overwrite) {
@@ -82,35 +51,47 @@ function SafeLink {
         Remove-Item -Path $Link -Confirm:$False
       }
     } else {
-      Rename-Item -Path $Link -NewName "$Link.bak-$TimeStamp"
+      Move-Item -Path $Link -Destination $BackupDest
     }
   }
 
-  New-Item -ItemType SymbolicLink -Path $Link -Value $Target
+  New-Item -Type Junction -Path $Link -Value $Target | Out-Null
 }
 
-$DotFilesRoot = Join-Path -Path $Repo -ChildPath "dotfiles"
-$XDGConfigRoot = Join-Path -Path $Repo -ChildPath "xdg_config"
+function LinkProfileDir {
+  Param($ProfileDirName, $DotFileDirName)
+  if (-Not $ProfileDirName -Or -Not $DotFileDirName) { Throw "Invalid arguments" }
+  SafeLink -Link (Join-Path -Path $env:USERPROFILE -ChildPath $ProfileDirName) -Target (Join-Path -Path $DotFilesRoot -ChildPath $DotFileDirName)
+}
 
-$TimeStamp = (Get-Date -UFormat "%s").split(".")[0]
+function LinkXDGConfigDir {
+  Param($XdgDirName)
+  if (-Not $XdgDirName) { Throw "Invalid arguments" }
+  SafeLink -Link (Join-Path -Path $XdgConfigHome -ChildPath $XdgDirName) -Target (Join-Path -Path $XdgConfigRoot -ChildPath $XdgDirName) -BackupDest $XdgBackupDir
+}
 
 # Test linking before trying the real thing
 $testfile = (Join-Path -Path $env:TEMP -ChildPath "deleteme-dotfiles-$TimeStamp.tmp")
 try {
-  LinkDotFile -Link $testfile -DotFile "vim/vimrc" | Out-Null
+  SafeLink -Link $testfile -Target $XdgBackupDir
 } catch { throw } finally {
-  Remove-Item -Path $testfile -Force -ErrorAction SilentlyContinue
+  [IO.Directory]::Delete($testFile)
 }
 
-LinkDotFile -ProfileLink "_ackrc"     -DotFile "ackrc"
-if (-Not $env:ACKRC -And $PSCmdlet.ShouldProcess("ACKRC", "Set env var")) {
-  [System.Environment]::SetEnvironmentVariable(
-    "ACKRC",
-    (Join-Path -Path $env:USERPROFILE -ChildPath '_ackrc'),
-    [System.EnvironmentVariableTarget]::User)
+$UserEnvVars = @{
+  'ACKRC'=(Join-Path -Path $DotFilesRoot -ChildPath 'ackrc')
 }
 
-LinkDotFile -ProfileLink ".gitconfig" -DotFile "gitconfig"
-LinkDotFile -ProfileLink "vimfiles"   -DotFile "vim"
+$UserEnvVars.Keys | ForEach-Object {
+  $OldVar = "$_=$([System.Environment]::GetEnvironmentVariable($_, [System.EnvironmentVariableTarget]::User))"
 
-LinkXdgConfigFile -XDGConfigFile "git"
+  Write-Verbose "Found old env: $OldVar"
+  $OldVar | Out-File -Append -FilePath (Join-Path -Path $BackupDir -ChildPath 'UserEnvVars.txt')
+
+  Write-Verbose "Setting new env: $_=$($UserEnvVars[$_])"
+  [System.Environment]::SetEnvironmentVariable($_, $UserEnvVars[$_], [System.EnvironmentVariableTarget]::User)
+}
+
+LinkXdgConfigDir -XdgDirName "git"
+LinkProfileDir -ProfileDirName "vimfiles" -DotFileDirName "vim"
+
