@@ -41,6 +41,7 @@
 	lgvvv = log --graph --pretty=lg --date=relative --all
 	logtree = log --graph --pretty=logtree --date=iso
 	pushup = push --set-upstream origin HEAD
+	forcepushup = push --force-with-lease --set-upstream origin HEAD
 	fixup = commit --amend --reset-author --no-edit
 	tidy = clean -xd -e .vs -e *.swp
 	alias = config --get-regexp '^alias\\.'
