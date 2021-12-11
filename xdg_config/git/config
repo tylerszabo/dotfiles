@@ -35,7 +35,11 @@
 	colorMoved = zebra
 	colorMovedWS = allow-indentation-change
 [alias]
-	lg = log --graph --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
+	lg = log --graph --pretty=lg --date=relative --branches=*
+	lgv = log --graph --pretty=lg --date=relative --branches=* --tags=* --remotes=*/HEAD
+	lgvv = log --graph --pretty=lg --date=relative --branches=* --tags=* --remotes=*
+	lgvvv = log --graph --pretty=lg --date=relative --all
+	logtree = log --graph --pretty=logtree --date=iso
 	pushup = push --set-upstream origin HEAD
 	fixup = commit --amend --reset-author --no-edit
 	tidy = clean -xd -e .vs -e *.swp
@@ -57,3 +61,6 @@
 [diff "pandoc"]
 	textconv = pandoc --wrap=none --to=markdown
 	prompt = false
+[pretty]
+	lg = %C(auto)%h%Creset%C(auto)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset
+	logtree = %C(auto)%h%Creset{%C(auto,brightwhite)%t%Creset} %Cgreen(%cd)%C(auto)%d%Creset %s %Cblue<%aN>%Creset
