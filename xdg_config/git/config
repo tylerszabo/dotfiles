@@ -22,7 +22,7 @@
 	eol = lf
 	safecrlf = warn
 [push]
-	default = matching
+	default = upstream
 [merge]
 	tool = gvimdiff
 [mergetool]
